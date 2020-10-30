@@ -156,25 +156,12 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.3.1" >
-            
-                <a target="_blank" href="https://github.com/alidock/alidock/wiki">
-            
-                    
-                    🐳 Using alidock
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3.2" data-path="../building/custom.html">
+        <li class="chapter " data-level="1.3.1" data-path="../building/custom.html">
             
                 <a href="../building/custom.html">
             
                     
-                    🛠 Custom installation
+                    🧪 Installation via alibuild
             
                 </a>
             
@@ -183,7 +170,7 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.3.2.1" data-path="../building/prereq-centos7.html">
+        <li class="chapter " data-level="1.3.1.1" data-path="../building/prereq-centos7.html">
             
                 <a href="../building/prereq-centos7.html">
             
@@ -196,7 +183,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3.2.2" data-path="../building/prereq-macos.html">
+        <li class="chapter " data-level="1.3.1.2" data-path="../building/prereq-macos.html">
             
                 <a href="../building/prereq-macos.html">
             
@@ -209,7 +196,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3.2.3" data-path="../building/prereq-ubuntu.html">
+        <li class="chapter " data-level="1.3.1.3" data-path="../building/prereq-ubuntu.html">
             
                 <a href="../building/prereq-ubuntu.html">
             
@@ -222,7 +209,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3.2.4" data-path="../building/prereq-fedora.html">
+        <li class="chapter " data-level="1.3.1.4" data-path="../building/prereq-fedora.html">
             
                 <a href="../building/prereq-fedora.html">
             
@@ -240,12 +227,12 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3.3" data-path="../building/build.html">
+        <li class="chapter " data-level="1.3.2" data-path="../building/build.html">
             
                 <a href="../building/build.html">
             
                     
-                    🧪 Build the packages
+                    🛠 Build the packages
             
                 </a>
             
@@ -253,12 +240,38 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3.4" data-path="../building/precomp.html">
+        <li class="chapter " data-level="1.3.3" data-path="../building/precomp.html">
             
                 <a href="../building/precomp.html">
             
                     
                     📦 Use the precompiled binaries
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="../building/devel.html">
+            
+                <a href="../building/devel.html">
+            
+                    
+                    💪 Develop a single package (Experimental)
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" >
+            
+                <a target="_blank" href="https://github.com/alidock/alidock/wiki">
+            
+                    
+                    🐳 Using alidock
             
                 </a>
             
@@ -363,7 +376,20 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.7" data-path="../analysis/trouble.html">
+        <li class="chapter " data-level="1.4.7" data-path="../analysis/oadb.html">
+            
+                <a href="../analysis/oadb.html">
+            
+                    
+                    Offline analysis database
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.8" data-path="../analysis/trouble.html">
             
                 <a href="../analysis/trouble.html">
             
@@ -376,7 +402,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.8" data-path="../analysis/streamer.html">
+        <li class="chapter " data-level="1.4.9" data-path="../analysis/streamer.html">
             
                 <a href="../analysis/streamer.html">
             
@@ -389,7 +415,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.9" data-path="../analysis/destructor.html">
+        <li class="chapter " data-level="1.4.10" data-path="../analysis/destructor.html">
             
                 <a href="../analysis/destructor.html">
             
@@ -757,51 +783,68 @@
 <p>A calibration analysis is essential in case our generator does not provide some global event observable(s) required by the main analysis. Such a calibration analysis is similar to a regular one but instead of producing comparisons to the existing experimental data it produces distributions of different observables, such as impact parameter distribution. It should be pointed out that there might be multiple analyses using the same calibration analysis. An example of a calibration analysis producing a V0M multiplicity distribution and an impact parameter distribution is provided below:</p>
 <pre><code class="lang-cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;Rivet/Analysis.hh&gt;</span></span>
 <span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;Rivet/Projections/AliceCommon.hh&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;Rivet/Projections/HepMCHeavyIon.hh&gt;</span></span>
 
 <span class="hljs-keyword">namespace</span> Rivet {
 
+  <span class="hljs-comment">/// Dummy analysis for centrality calibration in Pb-Pb at 5.02TeV</span>
+  <span class="hljs-comment">///</span>
+  <span class="hljs-comment">/// @author Christian Holm Christensen &lt;cholm@nbi.dk&gt;</span>
   <span class="hljs-keyword">class</span> ALICE_2015_PBPBCentrality : <span class="hljs-keyword">public</span> Analysis {
   <span class="hljs-keyword">public</span>:
-    ALICE_2015_PBPBCentrality()
-      : Analysis(<span class="hljs-string">&quot;ALICE_2015_PBPBCentrality&quot;</span>) { }
 
+    <span class="hljs-comment">/// Constructor </span>
+    ALICE_2015_PBPBCentrality()
+      : Analysis(<span class="hljs-string">&quot;ALICE_2015_PBPBCentrality&quot;</span>)
+    {    }
+
+    <span class="hljs-comment">/// Initialize this analysis. </span>
     <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">init</span><span class="hljs-params">()</span> </span>{
       ALICE::V0AndTrigger v0and;
-      declare&lt;ALICE::V0AndTrigger&gt;(v0and, <span class="hljs-string">&quot;V0-AND&quot;</span>);
+      declare&lt;ALICE::V0AndTrigger&gt;(v0and,<span class="hljs-string">&quot;V0-AND&quot;</span>);
 
       ALICE::V0MMultiplicity v0m;
-      declare&lt;ALICE::V0MMultiplicity&gt;(v0m, <span class="hljs-string">&quot;V0M&quot;</span>);
+      declare&lt;ALICE::V0MMultiplicity&gt;(v0m,<span class="hljs-string">&quot;V0M&quot;</span>);
 
-      _v0m = bookHisto1D(<span class="hljs-string">&quot;V0M&quot;</span>, <span class="hljs-string">&quot;Forward multiplicity&quot;</span>, <span class="hljs-string">&quot;V0M&quot;</span>, <span class="hljs-string">&quot;Events&quot;</span>);
-      _imp = bookHisto1D(<span class="hljs-string">&quot;V0M_IMP&quot;</span>, <span class="hljs-number">100</span>, <span class="hljs-number">0</span>, <span class="hljs-number">20</span>, <span class="hljs-string">&quot;Impact parameter&quot;</span>, <span class="hljs-string">&quot;b (fm)&quot;</span>, <span class="hljs-string">&quot;Events&quot;</span>);
+       <span class="hljs-comment">// Access the HepMC heavy ion info</span>
+      declare(HepMCHeavyIon(), <span class="hljs-string">&quot;HepMC&quot;</span>);
+
+      book(_v0m, <span class="hljs-string">&quot;V0M&quot;</span>);
+      book(_imp, <span class="hljs-string">&quot;V0M_IMP&quot;</span>,<span class="hljs-number">100</span>,<span class="hljs-number">0</span>,<span class="hljs-number">20</span>);
     }
 
+
+    <span class="hljs-comment">/// Analyse a single event.</span>
     <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">analyze</span><span class="hljs-params">(<span class="hljs-keyword">const</span> Event&amp; event)</span> </span>{
-      <span class="hljs-comment">// Get and fill in the impact parameter value if the information is valid</span>
-      <span class="hljs-keyword">const</span> HepMC::GenEvent* ge = event.genEvent();
-      <span class="hljs-keyword">const</span> HepMC::HeavyIon* hi = ge-&gt;heavy_ion();
-      <span class="hljs-keyword">if</span> (hi &amp;&amp; hi-&gt;is_valid())
-        _imp-&gt;fill(hi-&gt;impact_parameter(), event.weight());
+      <span class="hljs-comment">// Get and fill in the impact parameter value if the information is valid.</span>
+      _imp-&gt;fill(apply&lt;HepMCHeavyIon&gt;(event, <span class="hljs-string">&quot;HepMC&quot;</span>).impact_parameter());
 
       <span class="hljs-comment">// Check if we have any hit in either V0-A or -C.  If not, the</span>
-      <span class="hljs-comment">// event is not selected and we get out</span>
+      <span class="hljs-comment">// event is not selected and we get out.</span>
       <span class="hljs-keyword">if</span> (!apply&lt;ALICE::V0AndTrigger&gt;(event,<span class="hljs-string">&quot;V0-AND&quot;</span>)()) <span class="hljs-keyword">return</span>;
 
       <span class="hljs-comment">// Fill in the V0 multiplicity for this event</span>
-      _v0m-&gt;fill(apply&lt;ALICE::V0MMultiplicity&gt;(event,<span class="hljs-string">&quot;V0M&quot;</span>)(), event.weight());
+      _v0m-&gt;fill(apply&lt;ALICE::V0MMultiplicity&gt;(event,<span class="hljs-string">&quot;V0M&quot;</span>)());
     }
 
+
+    <span class="hljs-comment">/// Finalize this analysis</span>
     <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">finalize</span><span class="hljs-params">()</span> </span>{
       _v0m-&gt;normalize();
       _imp-&gt;normalize();
     }
 
-    <span class="hljs-comment">// The distribution of V0M multiplicity</span>
+    <span class="hljs-comment">/// The distribution of V0M multiplicity</span>
     Histo1DPtr _v0m;
-    <span class="hljs-comment">// The distribution of impact parameters</span>
+    <span class="hljs-comment">/// The distribution of impact parameters</span>
     Histo1DPtr _imp;
+
   };
+
+
+  <span class="hljs-comment">// The hook for the plugin system</span>
   DECLARE_RIVET_PLUGIN(ALICE_2015_PBPBCentrality);
+
 }
 </code></pre>
 <p>This calibration analysis can be run in the same way as any other analysis:</p>
@@ -820,7 +863,7 @@
 <pre><code>[...]
 Options:
  - cent=REF,GEN,IMP,USR
-Beams: [1000822080, 1000822080] # PDG of lead ion
+Beams: [Pb, Pb] # PDG of lead ion
 Energies: [574080] # This is _total_ energy of beams, so this becomes 208*2760=574080
 [...]
 </code></pre><h2 id="preloading-calibration-files">Preloading calibration files</h2>
@@ -849,16 +892,12 @@ Energies: [574080] # This is _total_ energy of beams, so this becomes 208*2760=5
 <span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-string">&quot;Rivet/Projections/SingleValueProjection.hh&quot;</span></span>
 <span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-string">&quot;Rivet/Tools/AliceCommon.hh&quot;</span></span>
 <span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-string">&quot;Rivet/Projections/AliceCommon.hh&quot;</span></span>
-<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;fstream&gt;</span></span>
-
-<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> _USE_MATH_DEFINES</span>
-<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;cmath&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-string">&quot;Rivet/Projections/HepMCHeavyIon.hh&quot;</span></span>
 
 <span class="hljs-keyword">namespace</span> Rivet {
 
   <span class="hljs-comment">/// @brief ALICE PbPb at 2.76 TeV multiplicity at mid-rapidity</span>
-  <span class="hljs-keyword">class</span> ALICE_2010_I880049 : <span class="hljs-keyword">public</span> Analysis {
-
+  <span class="hljs-keyword">class</span> ALICE_2010_I880049 : <span class="hljs-keyword">public</span> Analysis {    
   <span class="hljs-keyword">public</span>:
 
     <span class="hljs-comment">/// Constructor</span>
@@ -886,17 +925,18 @@ Energies: [574080] # This is _total_ energy of beams, so this becomes 208*2760=5
       declare(ALICE::PrimaryParticles(Cuts::abseta &lt; <span class="hljs-number">0.5</span> &amp;&amp;
         Cuts::pT &gt; <span class="hljs-number">50</span>*MeV &amp;&amp; Cuts::abscharge &gt; <span class="hljs-number">0</span>), <span class="hljs-string">&quot;APRIM&quot;</span>);
 
+      <span class="hljs-comment">// Access the HepMC heavy ion info</span>
+      declare(HepMCHeavyIon(), <span class="hljs-string">&quot;HepMC&quot;</span>);
+
       <span class="hljs-comment">// Histograms and variables initialization</span>
-      _histNchVsCentr = bookProfile1D(<span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>);
-      _histNpartVsCentr = bookProfile1D(<span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>);
+      book(_histNchVsCentr, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>);
+      book(_histNpartVsCentr, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>);
 
     }
 
 
     <span class="hljs-comment">/// Perform the per-event analysis</span>
     <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">analyze</span><span class="hljs-params">(<span class="hljs-keyword">const</span> Event&amp; event)</span> </span>{
-
-      <span class="hljs-keyword">const</span> <span class="hljs-keyword">double</span> weight = event.weight();
 
       <span class="hljs-comment">// Charged, primary particles with at least pT = 50 MeV</span>
       <span class="hljs-comment">// in eta range of |eta| &lt; 0.5</span>
@@ -919,29 +959,24 @@ Energies: [574080] # This is _total_ energy of beams, so this becomes 208*2760=5
       <span class="hljs-keyword">const</span> CentralityProjection&amp; centrProj =
         apply&lt;CentralityProjection&gt;(event, <span class="hljs-string">&quot;V0M&quot;</span>);
       <span class="hljs-keyword">double</span> centr = centrProj();
-      <span class="hljs-keyword">if</span> (centr &gt; <span class="hljs-number">80.</span>)
-        vetoEvent;
-
+      <span class="hljs-keyword">if</span> (centr &gt; <span class="hljs-number">80</span>) vetoEvent;
       <span class="hljs-comment">// Calculate number of charged particles and fill histogram</span>
       <span class="hljs-keyword">double</span> nch = chargedParticles.size();
-      _histNchVsCentr-&gt;fill(centr, nch, weight);
+      _histNchVsCentr-&gt;fill(centr, nch);
 
       <span class="hljs-comment">// Attempt to extract Npart form GenEvent.</span>
-      <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Unclear how to handle this in HepMC3</span>
-      <span class="hljs-keyword">const</span> HepMC::HeavyIon* hi = event.genEvent()-&gt;heavy_ion();
-      <span class="hljs-keyword">if</span> (hi &amp;&amp; hi-&gt;is_valid()) {
-        _histNpartVsCentr-&gt;fill(centr, hi-&gt;Npart_proj() + hi-&gt;Npart_targ(),
-          weight);
+      <span class="hljs-keyword">if</span> (event.genEvent()-&gt;heavy_ion()) {
+        <span class="hljs-keyword">const</span> HepMCHeavyIon &amp; hi = apply&lt;HepMCHeavyIon&gt;(event, <span class="hljs-string">&quot;HepMC&quot;</span>);
+        _histNpartVsCentr-&gt;fill(centr, hi.Npart_proj() + hi.Npart_targ());
       }
     }
 
 
     <span class="hljs-comment">/// Normalise histograms etc., after the run</span>
-    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">finalize</span><span class="hljs-params">()</span> </span>{
-
-    }
+    <span class="hljs-comment">//void finalize() {   }</span>
 
     <span class="hljs-comment">//@}</span>
+
 
   <span class="hljs-keyword">private</span>:
 
@@ -952,6 +987,7 @@ Energies: [574080] # This is _total_ energy of beams, so this becomes 208*2760=5
     <span class="hljs-comment">//@}</span>
 
   };
+
 
   <span class="hljs-comment">// The hook for the plugin system</span>
   DECLARE_RIVET_PLUGIN(ALICE_2010_I880049);
@@ -964,7 +1000,7 @@ Energies: [574080] # This is _total_ energy of beams, so this becomes 208*2760=5
 <pre><code>ssh &lt;username&gt;@lxplus.cern.ch
 </code></pre><p>After logging in you can enter the environment as follows:</p>
 <pre><code>alienv enter Rivet
-</code></pre><p>This will load all the environment required for Rivet. The following command should prompt us that we are going to use Rivet version 2.7.2:</p>
+</code></pre><p>This will load all the environment required for Rivet. The following command should prompt us that we are going to use Rivet version 3.1.1:</p>
 <pre><code>rivet --version
 </code></pre><p>Let&apos;s create a directory for our results:</p>
 <pre><code>mkdir /path/to/rivet-hi-tutorial
@@ -1024,7 +1060,7 @@ cd /path/to/rivet-hi-tutorial
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Introduction to heavy-ion features","level":"1.6.4","depth":2,"next":{"title":"Reference manual for Rivet in ALICE","level":"1.6.5","depth":2,"path":"rivet/reference-manual.md","ref":"rivet/reference-manual.md","articles":[]},"previous":{"title":"Implementing a Rivet analysis","level":"1.6.3","depth":2,"path":"rivet/implementing-rivet-analysis.md","ref":"rivet/implementing-rivet-analysis.md","articles":[]},"dir":"ltr"},"config":{"plugins":["katex","panels@git+https://github.com/lhcb/gitbook-plugin-panels.git#117012fdc18c96831cb88196980c0ea73b0c87b8","collapsible-menu","block-align","page-toc"],"styles":{"website":"css/website.css"},"pluginsConfig":{"collapsible-menu":{},"block-align":{},"search":{},"page-toc":{"position":"before-first","selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4","showByDefault":true},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"panels":{},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"ALICE Analysis Tutorial","gitbook":"*","description":"Introduction to the common analysis techniques and tools of ALICE"},"file":{"path":"rivet/hi-features.md","mtime":"2019-10-18T20:12:11.563Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-10-18T20:13:36.241Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Introduction to heavy-ion features","level":"1.6.4","depth":2,"next":{"title":"Reference manual for Rivet in ALICE","level":"1.6.5","depth":2,"path":"rivet/reference-manual.md","ref":"rivet/reference-manual.md","articles":[]},"previous":{"title":"Implementing a Rivet analysis","level":"1.6.3","depth":2,"path":"rivet/implementing-rivet-analysis.md","ref":"rivet/implementing-rivet-analysis.md","articles":[]},"dir":"ltr"},"config":{"plugins":["katex","panels@git+https://github.com/lhcb/gitbook-plugin-panels.git#117012fdc18c96831cb88196980c0ea73b0c87b8","collapsible-menu","block-align","page-toc"],"styles":{"website":"css/website.css"},"pluginsConfig":{"collapsible-menu":{},"block-align":{},"search":{},"page-toc":{"position":"before-first","selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4","showByDefault":true},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"panels":{},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"ALICE Analysis Tutorial","gitbook":"*","description":"Introduction to the common analysis techniques and tools of ALICE"},"file":{"path":"rivet/hi-features.md","mtime":"2020-10-30T11:38:17.455Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-10-30T11:39:00.580Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

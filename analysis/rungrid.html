@@ -156,25 +156,12 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.3.1" >
-            
-                <a target="_blank" href="https://github.com/alidock/alidock/wiki">
-            
-                    
-                    🐳 Using alidock
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3.2" data-path="../building/custom.html">
+        <li class="chapter " data-level="1.3.1" data-path="../building/custom.html">
             
                 <a href="../building/custom.html">
             
                     
-                    🛠 Custom installation
+                    🧪 Installation via alibuild
             
                 </a>
             
@@ -183,7 +170,7 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.3.2.1" data-path="../building/prereq-centos7.html">
+        <li class="chapter " data-level="1.3.1.1" data-path="../building/prereq-centos7.html">
             
                 <a href="../building/prereq-centos7.html">
             
@@ -196,7 +183,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3.2.2" data-path="../building/prereq-macos.html">
+        <li class="chapter " data-level="1.3.1.2" data-path="../building/prereq-macos.html">
             
                 <a href="../building/prereq-macos.html">
             
@@ -209,7 +196,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3.2.3" data-path="../building/prereq-ubuntu.html">
+        <li class="chapter " data-level="1.3.1.3" data-path="../building/prereq-ubuntu.html">
             
                 <a href="../building/prereq-ubuntu.html">
             
@@ -222,7 +209,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3.2.4" data-path="../building/prereq-fedora.html">
+        <li class="chapter " data-level="1.3.1.4" data-path="../building/prereq-fedora.html">
             
                 <a href="../building/prereq-fedora.html">
             
@@ -240,12 +227,12 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3.3" data-path="../building/build.html">
+        <li class="chapter " data-level="1.3.2" data-path="../building/build.html">
             
                 <a href="../building/build.html">
             
                     
-                    🧪 Build the packages
+                    🛠 Build the packages
             
                 </a>
             
@@ -253,12 +240,38 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3.4" data-path="../building/precomp.html">
+        <li class="chapter " data-level="1.3.3" data-path="../building/precomp.html">
             
                 <a href="../building/precomp.html">
             
                     
                     📦 Use the precompiled binaries
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="../building/devel.html">
+            
+                <a href="../building/devel.html">
+            
+                    
+                    💪 Develop a single package (Experimental)
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" >
+            
+                <a target="_blank" href="https://github.com/alidock/alidock/wiki">
+            
+                    
+                    🐳 Using alidock
             
                 </a>
             
@@ -363,7 +376,20 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.7" data-path="trouble.html">
+        <li class="chapter " data-level="1.4.7" data-path="oadb.html">
+            
+                <a href="oadb.html">
+            
+                    
+                    Offline analysis database
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.8" data-path="trouble.html">
             
                 <a href="trouble.html">
             
@@ -376,7 +402,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.8" data-path="streamer.html">
+        <li class="chapter " data-level="1.4.9" data-path="streamer.html">
             
                 <a href="streamer.html">
             
@@ -389,7 +415,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.9" data-path="destructor.html">
+        <li class="chapter " data-level="1.4.10" data-path="destructor.html">
             
                 <a href="destructor.html">
             
@@ -761,7 +787,7 @@
 <li>Using all existing types of input data to be processed (root files, raw AliEn collections or XML collections) detecting their type automatically;</li>
 <li>Generate XML collections corresponding to requested runs and/or data patterns;</li>
 <li>Automatically detect presence of tags in input data and allow using tag-based cuts in a very simple way;</li>
-<li>Automatically connect to AliEn (generate a token if needed) - still requires sourcing the environment file produced by alien.token-init;</li>
+<li>Automatically connect to AliEn (generate a token if needed)</li>
 <li>Generate automatically: JDL, analysis macro to be run in grid, execution and validation scripts according a simple to understand user-driven configuration; </li>
 <li>Copy all needed files in user&apos;s AliEn space and submit the job automatically;</li>
 <li>Start an alien shell to allow inspecting the job status;</li>
@@ -842,7 +868,7 @@
 <h2 id="ready-to-go">Ready to go?</h2>
 <p>When you run an analysis in test mode, a Grid environment is simulated locally for testing. Input data is downloaded from the file catalogue, following your configuration of the analysis plugin. After this, your analysis is executed. Running in test mode is an excellent way of convincing yourself that you have set up the plugin correctly. </p>
 <p>Once your analysis test is finished, and you are convinced that your analysis output looks sane, you can submit your analysis to the Grid nodes. To do this, simply look at at the code snippet above, and assume that the variable <code>gridTest</code> is set to kFALSE. </p>
-<p><div class="panel panel-primary"><div class="panel-heading"><h3 class="panel-title" onclick="javascript:toggle(9770691166);" id="do-not-forget-your-token"><i class="fa fa-info-circle"></i> Do not forget your token!<span id="heading-9770691166"></span></h3></div><div class="panel-body" id="panel-9770691166"><p>Only ALICE members with a valid registration can submit jobs to the Grid and access the ALICE data. To identify yourself as an ALICE member, you will have to make sure that you have a valid token prior to launching your Grid jobs, be it in full or in test mode. To obtain a token, do</p>
+<p><div class="panel panel-primary"><div class="panel-heading"><h3 class="panel-title" onclick="javascript:toggle(453164894);" id="create-alien-legacy-token"><i class="fa fa-info-circle"></i> Create AliEn legacy token!<span id="heading-453164894"></span></h3></div><div class="panel-body" id="panel-453164894"><p>Only ALICE members with a valid registration can submit jobs to the Grid and access the ALICE data. To identify yourself as an ALICE member, you will have to make sure that you have a valid token prior to launching your Grid jobs, be it in full or in test mode. If you are using AliEn legacy, then you need to obtain a token manually. If you are using JAliEn, then the token will be obtained automatically.</p>
 <pre><code>$ alien-token-init &lt;username&gt;
 </code></pre><p>if all is fine, you should be prompted for your password, and see something like</p>
 <pre><code>    =&gt; Trying to connect to Server [0] root://pcapiserv03.cern.ch:10000 as User &lt;username&gt;
@@ -862,7 +888,7 @@
     mgr-&gt;SetRunMode(<span class="hljs-string">&quot;full&quot;</span>);
 </code></pre>
 <p>This will prepare the plugin for writing merging jobs, when your analysis is done. 
-<div class="panel panel-primary"><div class="panel-heading"><h3 class="panel-title" onclick="javascript:toggle(6615066982);" id="more-than-on-merging-stage"><i class="fa fa-info-circle"></i> More than on merging stage?<span id="heading-6615066982"></span></h3></div><div class="panel-body" id="panel-6615066982"><p>By specifying</p>
+<div class="panel panel-primary"><div class="panel-heading"><h3 class="panel-title" onclick="javascript:toggle(3211288428);" id="more-than-on-merging-stage"><i class="fa fa-info-circle"></i> More than on merging stage?<span id="heading-3211288428"></span></h3></div><div class="panel-body" id="panel-3211288428"><p>By specifying</p>
 <pre><code class="lang-cpp">   alienHandler-&gt;SetMaxMergeStages(<span class="hljs-number">1</span>);
 </code></pre>
 <p>we tell the plugin that all output files can be merged in one go. </p>
@@ -883,7 +909,7 @@
     mgr-&gt;SetRunMode(<span class="hljs-string">&quot;terminate&quot;</span>);
 </code></pre>
 <p>and running <code>runAnalysis.C</code> a final time. This will trigger downloading of the merged output files (the resulting files from the merging jobs) and a final &apos;local&apos; merge of said files into one, single output file. When the process is <strong>done</strong> your high-statistics output files is ready - time to start writing a paper!</p>
-<p><div class="panel panel-primary"><div class="panel-heading"><h3 class="panel-title" onclick="javascript:toggle(962007699);" id="merging-is-dumb"><i class="fa fa-info-circle"></i> Merging is &apos;dumb&apos;<span id="heading-962007699"></span></h3></div><div class="panel-body" id="panel-962007699"><p>Keep in mind: merging can be a memory-hungry process. During merging, all files that are to be merged are kept in random access memory. ROOT files tend to be heavily compressed when written to disk, so their size in RAM might be surprisingly large. </p>
+<p><div class="panel panel-primary"><div class="panel-heading"><h3 class="panel-title" onclick="javascript:toggle(5841682907);" id="merging-is-dumb"><i class="fa fa-info-circle"></i> Merging is &apos;dumb&apos;<span id="heading-5841682907"></span></h3></div><div class="panel-body" id="panel-5841682907"><p>Keep in mind: merging can be a memory-hungry process. During merging, all files that are to be merged are kept in random access memory. ROOT files tend to be heavily compressed when written to disk, so their size in RAM might be surprisingly large. </p>
 <p>When your output files are large, or if you have a large number of output files to be merged, you might need to merge in multiple stages, to avoid running out of RAM!</p>
 </div></div></p>
 
@@ -929,7 +955,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Running on Grid","level":"1.4.4","depth":2,"next":{"title":"The LEGO train system","level":"1.4.5","depth":2,"path":"analysis/lego.md","ref":"analysis/lego.md","articles":[]},"previous":{"title":"Running locally","level":"1.4.3","depth":2,"path":"analysis/local.md","ref":"analysis/local.md","articles":[]},"dir":"ltr"},"config":{"plugins":["katex","panels@git+https://github.com/lhcb/gitbook-plugin-panels.git#117012fdc18c96831cb88196980c0ea73b0c87b8","collapsible-menu","block-align","page-toc"],"styles":{"website":"css/website.css"},"pluginsConfig":{"collapsible-menu":{},"block-align":{},"search":{},"page-toc":{"position":"before-first","selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4","showByDefault":true},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"panels":{},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"ALICE Analysis Tutorial","gitbook":"*","description":"Introduction to the common analysis techniques and tools of ALICE"},"file":{"path":"analysis/rungrid.md","mtime":"2019-10-18T20:12:11.559Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-10-18T20:13:36.241Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Running on Grid","level":"1.4.4","depth":2,"next":{"title":"The LEGO train system","level":"1.4.5","depth":2,"path":"analysis/lego.md","ref":"analysis/lego.md","articles":[]},"previous":{"title":"Running locally","level":"1.4.3","depth":2,"path":"analysis/local.md","ref":"analysis/local.md","articles":[]},"dir":"ltr"},"config":{"plugins":["katex","panels@git+https://github.com/lhcb/gitbook-plugin-panels.git#117012fdc18c96831cb88196980c0ea73b0c87b8","collapsible-menu","block-align","page-toc"],"styles":{"website":"css/website.css"},"pluginsConfig":{"collapsible-menu":{},"block-align":{},"search":{},"page-toc":{"position":"before-first","selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4","showByDefault":true},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"panels":{},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"ALICE Analysis Tutorial","gitbook":"*","description":"Introduction to the common analysis techniques and tools of ALICE"},"file":{"path":"analysis/rungrid.md","mtime":"2020-10-30T11:38:17.455Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-10-30T11:39:00.580Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

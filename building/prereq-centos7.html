@@ -156,25 +156,12 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.3.1" >
-            
-                <a target="_blank" href="https://github.com/alidock/alidock/wiki">
-            
-                    
-                    🐳 Using alidock
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3.2" data-path="custom.html">
+        <li class="chapter " data-level="1.3.1" data-path="custom.html">
             
                 <a href="custom.html">
             
                     
-                    🛠 Custom installation
+                    🧪 Installation via alibuild
             
                 </a>
             
@@ -183,7 +170,7 @@
             <ul class="articles">
                 
     
-        <li class="chapter active" data-level="1.3.2.1" data-path="prereq-centos7.html">
+        <li class="chapter active" data-level="1.3.1.1" data-path="prereq-centos7.html">
             
                 <a href="prereq-centos7.html">
             
@@ -196,7 +183,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3.2.2" data-path="prereq-macos.html">
+        <li class="chapter " data-level="1.3.1.2" data-path="prereq-macos.html">
             
                 <a href="prereq-macos.html">
             
@@ -209,7 +196,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3.2.3" data-path="prereq-ubuntu.html">
+        <li class="chapter " data-level="1.3.1.3" data-path="prereq-ubuntu.html">
             
                 <a href="prereq-ubuntu.html">
             
@@ -222,7 +209,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3.2.4" data-path="prereq-fedora.html">
+        <li class="chapter " data-level="1.3.1.4" data-path="prereq-fedora.html">
             
                 <a href="prereq-fedora.html">
             
@@ -240,12 +227,12 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3.3" data-path="build.html">
+        <li class="chapter " data-level="1.3.2" data-path="build.html">
             
                 <a href="build.html">
             
                     
-                    🧪 Build the packages
+                    🛠 Build the packages
             
                 </a>
             
@@ -253,12 +240,38 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3.4" data-path="precomp.html">
+        <li class="chapter " data-level="1.3.3" data-path="precomp.html">
             
                 <a href="precomp.html">
             
                     
                     📦 Use the precompiled binaries
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="devel.html">
+            
+                <a href="devel.html">
+            
+                    
+                    💪 Develop a single package (Experimental)
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" >
+            
+                <a target="_blank" href="https://github.com/alidock/alidock/wiki">
+            
+                    
+                    🐳 Using alidock
             
                 </a>
             
@@ -363,7 +376,20 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.7" data-path="../analysis/trouble.html">
+        <li class="chapter " data-level="1.4.7" data-path="../analysis/oadb.html">
+            
+                <a href="../analysis/oadb.html">
+            
+                    
+                    Offline analysis database
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.8" data-path="../analysis/trouble.html">
             
                 <a href="../analysis/trouble.html">
             
@@ -376,7 +402,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.8" data-path="../analysis/streamer.html">
+        <li class="chapter " data-level="1.4.9" data-path="../analysis/streamer.html">
             
                 <a href="../analysis/streamer.html">
             
@@ -389,7 +415,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.9" data-path="../analysis/destructor.html">
+        <li class="chapter " data-level="1.4.10" data-path="../analysis/destructor.html">
             
                 <a href="../analysis/destructor.html">
             
@@ -750,58 +776,49 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="alibuild-prerequisites-for-centos-7">aliBuild prerequisites for CentOS 7</h1>
+                                <h1 id="alibuild-prerequisites-for-centos-7">aliBuild Prerequisites for CentOS 7</h1>
 <!-- Dockerfile UPLOAD_NAME alisw/o2-cc7 -->
 <!-- Dockerfile FROM centos:7 -->
 <!-- Dockerfile RUN rpmdb --rebuilddb && yum clean all -->
-<p>For ALICE O2, our policy is <a href="https://indico.cern.ch/event/642232/#3-wp3-common-tools-and-softwar" target="_blank">to support CERN CentOS 7 as our official deployment
-platform</a>. CERN CentOS 7 is
-essentially a CentOS 7 with some more CERN-specific packages, so these instructions apply to the
-pristine CentOS 7 as well.</p>
-<p>As the primary supported platform, our <a href="https://github.com/alidock/alidock/wiki" target="_blank">alidock</a>
-installation method is based on it. If you use alidock, you don&apos;t need to follow those
-prerequisites. The environment we provide is ready to use.</p>
-<h2 id="install-or-upgrade-the-required-packages">Install or upgrade the required packages</h2>
-<p>Install packages (one long line, just copy and paste it), as <strong>root user</strong>:</p>
+<p>For ALICE O2, CERN CentOS 7 (CC7)is the <a href="https://indico.cern.ch/event/642232/#3-wp3-common-tools-and-softwar" target="_blank">officialy supported target platform</a>. Since CC7 is CentOS 7 with additional CERN packages, instructions apply to vanilla CentOS 7 as well.</p>
+<h2 id="install-or-upgrade-the-required-packages">Install or Upgrade the Required Packages</h2>
+<p>With root permissions, i.e. <code>sudo</code> or as <code>root</code> install the prerequisites using:</p>
 <!-- Dockerfile RUN_INLINE -->
-<pre><code class="lang-bash">yum install -y python git mysql-devel curl curl-devel python python-devel python-pip bzip2 bzip2-devel unzip autoconf automake texinfo gettext gettext-devel libtool freetype freetype-devel libpng libpng-devel sqlite sqlite-devel ncurses-devel mesa-libGLU-devel libX11-devel libXpm-devel libXext-devel libXft-devel libxml2 libxml2-devel motif motif-devel kernel-devel pciutils-devel kmod-devel bison flex perl-ExtUtils-Embed environment-modules tk-devel
+<pre><code class="lang-bash">yum install -y git mysql-devel curl curl-devel bzip2 bzip2-devel unzip autoconf automake texinfo gettext gettext-devel libtool freetype freetype-devel libpng libpng-devel sqlite sqlite-devel ncurses-devel mesa-libGLU-devel libX11-devel libXpm-devel libXext-devel libXft-devel libXi-devel libxml2 libxml2-devel motif motif-devel kernel-devel pciutils-devel kmod-devel bison flex perl-ExtUtils-Embed environment-modules tk-devel glfw-devel
 </code></pre>
-<p>Now get a recent version of <code>pip</code> (the Python package manager): this is required for installing aliBuild and other Python dependencies. Do, always as <strong>root user</strong>:</p>
-<!-- Dockerfile RUN_INLINE -->
-<pre><code>curl -o /tmp/get-pip.py https://bootstrap.pypa.io/get-pip.py
-python /tmp/get-pip.py
-</code></pre><p>Now get some Python dependencies (again <strong>as root user</strong>):</p>
-<!-- Dockerfile RUN_INLINE -->
-<pre><code class="lang-bash">pip install matplotlib==2.0.2 numpy certifi ipython==5.1.0 ipywidgets ipykernel notebook metakernel pyyaml
+<h2 id="python-and-pip">Python and pip</h2>
+<p>AliBuild, our build tool, is installed via the python Package manager <code>pip</code>.
+In case  </p>
+<pre><code class="lang-bash">pip3 show pip
 </code></pre>
-<h2 id="get-or-update-the-compiler-from-devtoolset">Get or update the compiler from Devtoolset</h2>
-<p>The default compiler on CentOS 7 is quite old. Luckily, <a href="https://www.softwarecollections.org/" target="_blank">Softawre
-Collections</a> has RPMs for recent versions of GCC.</p>
-<p><div class="panel panel-primary"><div class="panel-heading"><h3 class="panel-title" onclick="javascript:toggle(6707869179);" id="developer-toolset-version"><i class="fa fa-info-circle"></i> Developer Toolset version<span id="heading-6707869179"></span></h3></div><div class="panel-body" id="panel-6707869179"><p>CC7 with the Developer Toolset is the default OS for ALICE O2 operations, therefore we take
-particular care about compatibility and upgrading our recommendations. Our policy is to never
-upgrade O2 to a newer compiler unless the corresponding Developer Toolset package is out and tested.</p>
-<p>Every recommendation change concerning the Develpoer Toolset versions is reviewed, discussed and
-voted. The <strong>current situation (July 2018)</strong> is:</p>
-<ul>
-<li><a href="https://www.softwarecollections.org/en/scls/rhscl/devtoolset-7/" target="_blank">devtoolset-7</a> (GCC v7.3.1) is
-the currently <strong>approved and working</strong> version for O2.</li>
-</ul>
-<p><strong>Please make sure your <code>devtoolset-7</code> is up-to-date!</strong> Due to
-<a href="https://bugzilla.redhat.com/show_bug.cgi?id=1519073" target="_blank">a bug</a>, versions of <code>devtoolset-7</code> with GCC
-v7.2.1 do not work.</p>
-<p>All versions other than the very latest <code>devtoolset-7</code> are to be considered unsupported.</p>
-</div></div></p>
-<p>First off, enable Software Collections:</p>
-<!-- Dockerfile RUN_INLINE -->
+<p>returns <code>command not found</code> or similar, install <code>pip</code> with root permissions, i.e. <code>sudo</code> or as <code>root</code>:
+<!-- Dockerfile RUN_INLINE --></p>
+<pre><code class="lang-bash">yum install -y python3-pip
+pip3 install --upgrade pip
+</code></pre>
+<h2 id="get-or-update-developer-toolset-7">Get or Update Developer Toolset 7</h2>
+<p>We require a more recent set of compilers than shipped by the OS. They can be obtained via <a href="https://www.softwarecollections.org/" target="_blank">Softawre
+Collections</a>.</p>
+<p>The only supported Developer Toolset for ALICE software is <code>devtoolset-7</code>.</p>
+<p>With root permissions, i.e. <code>sudo</code> or as <code>root</code> enable software collections:
+<!-- Dockerfile RUN_INLINE --></p>
 <pre><code class="lang-bash">yum install -y centos-release-scl
 yum-config-manager --enable rhel-server-rhscl-7-rpms
 </code></pre>
-<p>Get the compiler with:</p>
-<!-- Dockerfile RUN_INLINE -->
+<p>Then, still with <code>root</code> permissions install compilers and developer tools via:
+<!-- Dockerfile RUN_INLINE --></p>
 <pre><code class="lang-bash">yum install -y devtoolset-7
 </code></pre>
-<p>Note that by default if you type now <code>gcc</code> at the prompt you will not see the new GCC! You need to
-enable it explicitly:</p>
+<p>By design these tools do not replace the standard tools shipped by the system and have to be enabled explicitly for every new shell session you open:</p>
+<pre><code class="lang-bash"><span class="hljs-built_in">source</span> scl_<span class="hljs-built_in">source</span> <span class="hljs-built_in">enable</span> devtoolset-7
+</code></pre>
+<p>If desired so, the above line can be added to your <code>~/.bashrc</code> or <code>~/.bash_profile</code>, so that tools shipped via devtoolset are automatically available in every shell. However beware that in some special cases that this might have undesired side effects.</p>
+<p>You can check if you are running the correct version of GCC with:</p>
+<pre><code class="lang-bash">gcc --version
+</code></pre>
+<p>It should report <code>GCC v7.3.1</code>.</p>
+<p>You are now ready for <a href="./#get-or-upgrade-alibuild">installing aliBuild and start building ALICE
+software</a></p>
 <!-- Dockerfile RUN yum install -y vim-enhanced emacs-nox -->
 <!-- Dockerfile RUN rpmdb --rebuilddb && yum clean all -->
 <!-- Dockerfile RUN echo "source scl_source enable devtoolset-7" >> /etc/profile -->
@@ -809,18 +826,6 @@ enable it explicitly:</p>
 <!-- Dockerfile RUN pip install alibuild -->
 <!-- Dockerfile RUN mkdir /lustre /cvmfs -->
 <!-- Dockerfile ENTRYPOINT ["/bin/bash"] -->
-<pre><code class="lang-bash"><span class="hljs-built_in">source</span> scl_<span class="hljs-built_in">source</span> <span class="hljs-built_in">enable</span> devtoolset-7
-</code></pre>
-<p>You can either do it in every shell manually, or add it to your <code>~/.bashrc</code> or <code>~/.bash_profile</code>. If
-you do so, the new GCC will always be enabled in every shell. This might not be desirable in some
-cases, so beware. Also, if you add this line to the shell configuration, this will be enabled in all
-new terminals (not the current one).</p>
-<p>You can check if you are running the correct version of GCC with:</p>
-<pre><code class="lang-bash">gcc --version
-</code></pre>
-<p>It should report <strong>GCC v7.3.1</strong>.</p>
-<p>You are now ready for <a href="./#get-or-upgrade-alibuild">installing aliBuild and start building ALICE
-software</a></p>
 
                                 
                                 </section>
@@ -848,7 +853,7 @@ software</a></p>
 
             
                 
-                <a href="custom.html" class="navigation navigation-prev " aria-label="Previous page: 🛠 Custom installation">
+                <a href="custom.html" class="navigation navigation-prev " aria-label="Previous page: 🧪 Installation via alibuild">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
@@ -864,7 +869,7 @@ software</a></p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Prerequisites for CentOS 7","level":"1.3.2.1","depth":3,"next":{"title":"Prerequisites for macOS","level":"1.3.2.2","depth":3,"path":"building/prereq-macos.md","ref":"building/prereq-macos.md","articles":[]},"previous":{"title":"🛠 Custom installation","level":"1.3.2","depth":2,"path":"building/custom.md","ref":"building/custom.md","articles":[{"title":"Prerequisites for CentOS 7","level":"1.3.2.1","depth":3,"path":"building/prereq-centos7.md","ref":"building/prereq-centos7.md","articles":[]},{"title":"Prerequisites for macOS","level":"1.3.2.2","depth":3,"path":"building/prereq-macos.md","ref":"building/prereq-macos.md","articles":[]},{"title":"Prerequisites for Ubuntu","level":"1.3.2.3","depth":3,"path":"building/prereq-ubuntu.md","ref":"building/prereq-ubuntu.md","articles":[]},{"title":"Prerequisites for Fedora","level":"1.3.2.4","depth":3,"path":"building/prereq-fedora.md","ref":"building/prereq-fedora.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["katex","panels@git+https://github.com/lhcb/gitbook-plugin-panels.git#117012fdc18c96831cb88196980c0ea73b0c87b8","collapsible-menu","block-align","page-toc"],"styles":{"website":"css/website.css"},"pluginsConfig":{"collapsible-menu":{},"block-align":{},"search":{},"page-toc":{"position":"before-first","selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4","showByDefault":true},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"panels":{},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"ALICE Analysis Tutorial","gitbook":"*","description":"Introduction to the common analysis techniques and tools of ALICE"},"file":{"path":"building/prereq-centos7.md","mtime":"2019-10-18T20:12:11.563Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-10-18T20:13:36.241Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Prerequisites for CentOS 7","level":"1.3.1.1","depth":3,"next":{"title":"Prerequisites for macOS","level":"1.3.1.2","depth":3,"path":"building/prereq-macos.md","ref":"building/prereq-macos.md","articles":[]},"previous":{"title":"🧪 Installation via alibuild","level":"1.3.1","depth":2,"path":"building/custom.md","ref":"building/custom.md","articles":[{"title":"Prerequisites for CentOS 7","level":"1.3.1.1","depth":3,"path":"building/prereq-centos7.md","ref":"building/prereq-centos7.md","articles":[]},{"title":"Prerequisites for macOS","level":"1.3.1.2","depth":3,"path":"building/prereq-macos.md","ref":"building/prereq-macos.md","articles":[]},{"title":"Prerequisites for Ubuntu","level":"1.3.1.3","depth":3,"path":"building/prereq-ubuntu.md","ref":"building/prereq-ubuntu.md","articles":[]},{"title":"Prerequisites for Fedora","level":"1.3.1.4","depth":3,"path":"building/prereq-fedora.md","ref":"building/prereq-fedora.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["katex","panels@git+https://github.com/lhcb/gitbook-plugin-panels.git#117012fdc18c96831cb88196980c0ea73b0c87b8","collapsible-menu","block-align","page-toc"],"styles":{"website":"css/website.css"},"pluginsConfig":{"collapsible-menu":{},"block-align":{},"search":{},"page-toc":{"position":"before-first","selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4","showByDefault":true},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"panels":{},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"ALICE Analysis Tutorial","gitbook":"*","description":"Introduction to the common analysis techniques and tools of ALICE"},"file":{"path":"building/prereq-centos7.md","mtime":"2020-10-30T11:38:17.455Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-10-30T11:39:00.580Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

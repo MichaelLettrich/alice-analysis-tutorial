@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>🛠 Custom installation · ALICE Analysis Tutorial</title>
+        <title>🧪 Installation via alibuild · ALICE Analysis Tutorial</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -67,6 +67,8 @@
     
     <link rel="next" href="prereq-centos7.html" />
     
+    
+    <link rel="prev" href="./" />
     
 
     </head>
@@ -154,25 +156,12 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.3.1" >
-            
-                <a target="_blank" href="https://github.com/alidock/alidock/wiki">
-            
-                    
-                    🐳 Using alidock
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter active" data-level="1.3.2" data-path="custom.html">
+        <li class="chapter active" data-level="1.3.1" data-path="custom.html">
             
                 <a href="custom.html">
             
                     
-                    🛠 Custom installation
+                    🧪 Installation via alibuild
             
                 </a>
             
@@ -181,7 +170,7 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.3.2.1" data-path="prereq-centos7.html">
+        <li class="chapter " data-level="1.3.1.1" data-path="prereq-centos7.html">
             
                 <a href="prereq-centos7.html">
             
@@ -194,7 +183,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3.2.2" data-path="prereq-macos.html">
+        <li class="chapter " data-level="1.3.1.2" data-path="prereq-macos.html">
             
                 <a href="prereq-macos.html">
             
@@ -207,7 +196,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3.2.3" data-path="prereq-ubuntu.html">
+        <li class="chapter " data-level="1.3.1.3" data-path="prereq-ubuntu.html">
             
                 <a href="prereq-ubuntu.html">
             
@@ -220,7 +209,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3.2.4" data-path="prereq-fedora.html">
+        <li class="chapter " data-level="1.3.1.4" data-path="prereq-fedora.html">
             
                 <a href="prereq-fedora.html">
             
@@ -238,12 +227,12 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3.3" data-path="build.html">
+        <li class="chapter " data-level="1.3.2" data-path="build.html">
             
                 <a href="build.html">
             
                     
-                    🧪 Build the packages
+                    🛠 Build the packages
             
                 </a>
             
@@ -251,12 +240,38 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3.4" data-path="precomp.html">
+        <li class="chapter " data-level="1.3.3" data-path="precomp.html">
             
                 <a href="precomp.html">
             
                     
                     📦 Use the precompiled binaries
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="devel.html">
+            
+                <a href="devel.html">
+            
+                    
+                    💪 Develop a single package (Experimental)
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" >
+            
+                <a target="_blank" href="https://github.com/alidock/alidock/wiki">
+            
+                    
+                    🐳 Using alidock
             
                 </a>
             
@@ -361,7 +376,20 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.7" data-path="../analysis/trouble.html">
+        <li class="chapter " data-level="1.4.7" data-path="../analysis/oadb.html">
+            
+                <a href="../analysis/oadb.html">
+            
+                    
+                    Offline analysis database
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.8" data-path="../analysis/trouble.html">
             
                 <a href="../analysis/trouble.html">
             
@@ -374,7 +402,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.8" data-path="../analysis/streamer.html">
+        <li class="chapter " data-level="1.4.9" data-path="../analysis/streamer.html">
             
                 <a href="../analysis/streamer.html">
             
@@ -387,7 +415,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.9" data-path="../analysis/destructor.html">
+        <li class="chapter " data-level="1.4.10" data-path="../analysis/destructor.html">
             
                 <a href="../analysis/destructor.html">
             
@@ -733,7 +761,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >🛠 Custom installation</a>
+        <a href=".." >🧪 Installation via alibuild</a>
     </h1>
 </div>
 
@@ -748,14 +776,11 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="&#x1F40C;-custom-installation">&#x1F40C; Custom installation</h1>
-<p>This section covers the normal ALICE software installation on your computer without using our
-custom environment. Using <a href="https://github.com/alidock/alidock/wiki" target="_blank">alidock</a> remains the preferred
-installation option: if you do not have good reasons not to use it, we recommend you switch to it.</p>
+                                <h1 id="&#x1F9EA;-installation-via-alibuild">&#x1F9EA; Installation via alibuild</h1>
 <p>Building software has become an increasingly complicated operation, as our software has many
 dependencies and we expect it to work both on your laptop and on the Grid. In addition, we support
 many Linux distributions and recent macOS versions.</p>
-<p><div class="panel panel-primary"><div class="panel-heading"><h3 class="panel-title" onclick="javascript:toggle(840173617);" id="please-follow-the-instructions-closely"><i class="fa fa-info-circle"></i> Please follow the instructions closely!<span id="heading-840173617"></span></h3></div><div class="panel-body" id="panel-840173617"><p>Most of the paths and procedures presented here can be adapted to your system and your taste. You
+<p><div class="panel panel-primary"><div class="panel-heading"><h3 class="panel-title" onclick="javascript:toggle(5687290251);" id="please-follow-the-instructions-closely"><i class="fa fa-info-circle"></i> Please follow the instructions closely!<span id="heading-5687290251"></span></h3></div><div class="panel-body" id="panel-5687290251"><p>Most of the paths and procedures presented here can be adapted to your system and your taste. You
 can for instance decide to use different path names, or a different directory structure, it&apos;s up to
 you, however we <strong>do not recommend you use different ways of installing the required
 dependencies.</strong></p>
@@ -774,14 +799,15 @@ procedure <strong>very carefully and without diverging from it at all</strong>.<
 <h2 id="operating-systems-we-support">Operating systems we support</h2>
 <p>As per policy, the <a href="https://indico.cern.ch/event/642232/#3-wp3-common-tools-and-softwar" target="_blank">primary supported platform is CERN
 CentOS 7</a>:
-this is also our official deployment platform for Run 3 software. Given the popularity of other
-operating systems on laptops (including macOS), we provide a containerized installation method that
-allows you to keep using your favourite operating system by still having a consistent environment:</p>
+this is also our official deployment platform for Run 3 software.
+Other operating systems, such as macOS, are supported <em>as development platforms</em> and <em>on a
+best-effort basis</em>.</p>
+<p>Given the popularity of other operating systems on laptops (including macOS), we provide a
+containerized installation method, always supported <em>on a best-effort basis</em>,
+that allows you to keep using your favorite operating system by still having a consistent environment:</p>
 <ul>
 <li><a href="https://github.com/alidock/alidock/wiki" target="_blank">&#x1F433; Install using alidock</a></li>
 </ul>
-<p>Other operating systems, such as macOS, are supported <em>as development platforms</em> and <em>on a
-best-effort basis</em>. It is easier for us to support a single known environment through alidock.</p>
 <h3 id="prerequisites">Prerequisites</h3>
 <p>According to your operating system, please follow the prerequisites below. You will find a list of
 packages to install and configurations to perform.</p>
@@ -791,10 +817,17 @@ packages to install and configurations to perform.</p>
 </ul>
 <p><strong>Platforms supported on a best-effort basis:</strong></p>
 <ul>
-<li><a href="prereq-macos.html">macOS High Sierra (10.13) and Mojave (10.14)</a>
-<strong> &#x26A0;&#xFE0F;  only Mojave supported for Run 3 software &#x26A0;&#xFE0F;  </strong></li>
-<li><a href="prereq-ubuntu.html">Ubuntu 18.04 LTS, 17.10 and 16.04 LTS</a></li>
-<li><a href="prereq-fedora.html">Fedora 27</a></li>
+<li><a href="prereq-macos.html">macOS Mojave (10.14) and Catalina (10.15)</a>
+<strong> &#x26A0;&#xFE0F;  only Catalina supported for Run 3 software &#x26A0;&#xFE0F;  </strong></li>
+<li><a href="prereq-ubuntu.html">Ubuntu (16.04 LTS, 18.04 LTS, 20.04 LTS)</a></li>
+<li><a href="prereq-fedora.html">Fedora</a></li>
+<li>Linux Mint<ul>
+<li>Follow the instructions for the Ubuntu version your Linux Mint version is based on.</li>
+<li>Specify the corresponding Ubuntu architecture when running the <code>aliBuild</code> command
+using the <code>-a</code> option (e.g. <code>-a ubuntu2004_x86-64</code> for Ubuntu 20.04).
+Use the <code>-a</code> option also with the <code>alienv</code> command.</li>
+</ul>
+</li>
 </ul>
 <p>If your operating system is <em>not</em> in any list, it does not mean our software won&apos;t work on it;
 it will be just more difficult for you to get support for it.</p>
@@ -883,8 +916,12 @@ the next step.</p>
 
             
                 
+                <a href="./" class="navigation navigation-prev " aria-label="Previous page: Build ALICE software">
+                    <i class="fa fa-angle-left"></i>
+                </a>
                 
-                <a href="prereq-centos7.html" class="navigation navigation-next navigation-unique" aria-label="Next page: Prerequisites for CentOS 7">
+                
+                <a href="prereq-centos7.html" class="navigation navigation-next " aria-label="Next page: Prerequisites for CentOS 7">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -895,7 +932,7 @@ the next step.</p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"🛠 Custom installation","level":"1.3.2","depth":2,"next":{"title":"Prerequisites for CentOS 7","level":"1.3.2.1","depth":3,"path":"building/prereq-centos7.md","ref":"building/prereq-centos7.md","articles":[]},"previous":{"title":"🐳 Using alidock","level":"1.3.1","depth":2,"url":"https://github.com/alidock/alidock/wiki","ref":"https://github.com/alidock/alidock/wiki","articles":[]},"dir":"ltr"},"config":{"plugins":["katex","panels@git+https://github.com/lhcb/gitbook-plugin-panels.git#117012fdc18c96831cb88196980c0ea73b0c87b8","collapsible-menu","block-align","page-toc"],"styles":{"website":"css/website.css"},"pluginsConfig":{"collapsible-menu":{},"block-align":{},"search":{},"page-toc":{"position":"before-first","selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4","showByDefault":true},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"panels":{},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"ALICE Analysis Tutorial","gitbook":"*","description":"Introduction to the common analysis techniques and tools of ALICE"},"file":{"path":"building/custom.md","mtime":"2019-10-18T20:12:11.563Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-10-18T20:13:36.241Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"🧪 Installation via alibuild","level":"1.3.1","depth":2,"next":{"title":"Prerequisites for CentOS 7","level":"1.3.1.1","depth":3,"path":"building/prereq-centos7.md","ref":"building/prereq-centos7.md","articles":[]},"previous":{"title":"Build ALICE software","level":"1.3","depth":1,"path":"building/README.md","ref":"building/README.md","articles":[{"title":"🧪 Installation via alibuild","level":"1.3.1","depth":2,"path":"building/custom.md","ref":"building/custom.md","articles":[{"title":"Prerequisites for CentOS 7","level":"1.3.1.1","depth":3,"path":"building/prereq-centos7.md","ref":"building/prereq-centos7.md","articles":[]},{"title":"Prerequisites for macOS","level":"1.3.1.2","depth":3,"path":"building/prereq-macos.md","ref":"building/prereq-macos.md","articles":[]},{"title":"Prerequisites for Ubuntu","level":"1.3.1.3","depth":3,"path":"building/prereq-ubuntu.md","ref":"building/prereq-ubuntu.md","articles":[]},{"title":"Prerequisites for Fedora","level":"1.3.1.4","depth":3,"path":"building/prereq-fedora.md","ref":"building/prereq-fedora.md","articles":[]}]},{"title":"🛠 Build the packages","level":"1.3.2","depth":2,"path":"building/build.md","ref":"building/build.md","articles":[]},{"title":"📦 Use the precompiled binaries","level":"1.3.3","depth":2,"path":"building/precomp.md","ref":"building/precomp.md","articles":[]},{"title":"💪 Develop a single package (Experimental)","level":"1.3.4","depth":2,"path":"building/devel.md","ref":"building/devel.md","articles":[]},{"title":"🐳 Using alidock","level":"1.3.5","depth":2,"url":"https://github.com/alidock/alidock/wiki","ref":"https://github.com/alidock/alidock/wiki","articles":[]}]},"dir":"ltr"},"config":{"plugins":["katex","panels@git+https://github.com/lhcb/gitbook-plugin-panels.git#117012fdc18c96831cb88196980c0ea73b0c87b8","collapsible-menu","block-align","page-toc"],"styles":{"website":"css/website.css"},"pluginsConfig":{"collapsible-menu":{},"block-align":{},"search":{},"page-toc":{"position":"before-first","selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4","showByDefault":true},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"panels":{},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"ALICE Analysis Tutorial","gitbook":"*","description":"Introduction to the common analysis techniques and tools of ALICE"},"file":{"path":"building/custom.md","mtime":"2020-10-30T11:38:17.455Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-10-30T11:39:00.580Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

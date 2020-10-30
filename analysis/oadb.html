@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Destructors · ALICE Analysis Tutorial</title>
+        <title>Offline analysis database · ALICE Analysis Tutorial</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -65,10 +65,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="./" />
+    <link rel="next" href="trouble.html" />
     
     
-    <link rel="prev" href="streamer.html" />
+    <link rel="prev" href="monalisa.html" />
     
 
     </head>
@@ -376,7 +376,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.7" data-path="oadb.html">
+        <li class="chapter active" data-level="1.4.7" data-path="oadb.html">
             
                 <a href="oadb.html">
             
@@ -415,7 +415,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.4.10" data-path="destructor.html">
+        <li class="chapter " data-level="1.4.10" data-path="destructor.html">
             
                 <a href="destructor.html">
             
@@ -761,7 +761,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Destructors</a>
+        <a href=".." >Offline analysis database</a>
     </h1>
 </div>
 
@@ -776,147 +776,69 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="destructors">Destructors</h1>
-<p>We are at the end of the manual for writing a task, but we forgot to implement one important aspect of our analysis task: the destructor, copy constructor and assignment operator. Out class dynamically allocates memory (use of the <strong>new</strong>), for example when we create our histograms</p>
-<pre><code class="lang-cpp">
-        <span class="hljs-comment">// create our histo and add it to the list</span>
-        fHistPt = <span class="hljs-keyword">new</span> TH1F(<span class="hljs-string">&quot;fHistPt&quot;</span>, <span class="hljs-string">&quot;fHistPt&quot;</span>, <span class="hljs-number">100</span>, <span class="hljs-number">0</span>, <span class="hljs-number">100</span>);
+                                <h2 id="oadb-and-large-shared-files">OADB and large shared files</h2>
+<p>The Offline Analysis Database (OADB) is a repository of relatively large configuration/calibration files that are used by the analysis framework, 
+containing for example the &apos;TPC splines&apos; with the parametrised dE/dx response of the TPC and calibration files for event plane calculation.
+The data are generally stored in ROOT files, and the primary repository is on the CERN EOS file system, which is accessible from lxplus:</p>
+<pre><code>/eos/experiment/alice/analysis-data
+</code></pre><p>We have preserved the same directory structure found on AliPhysics, and the
+same permissions: for instance, <code>PWGLF</code> is writable by all members of
+<code>alice-svn-pwglf</code> (whose members can be edited by the group conveners).</p>
+<p>Every day, in concomitance with the AliPhysics daily tag (at 4pm Geneva time),
+this folder is snapshotted on CVMFS under the following path:</p>
+<pre><code>/cvmfs/alice.cern.ch/data/analysis/YYYY/vAN-YYYYMMDD
+</code></pre><p>carrying the same name as the corresponding AliPhysics tag. Moreover, at
+every AliRoot/AliPhysics production release, we also snapshot at:</p>
+<pre><code>/cvmfs/alice.cern.ch/data/prod/v5-XX-YY-01
+</code></pre><p>where the last component is the AliPhysics tag name.</p>
+<p>CVMFS brings the advantage to make data access from Grid jobs reliable and
+faster due to caching (files unchanged in two different snapshots are not
+downloaded twice).</p>
+<p>In order to profit from the separate storage for large files we have created an
+interface in AliRoot to allow transparent access to OADB files using a relative
+path. For instance, if you want to access the following large OADB data file:</p>
+<pre><code>PWGLF/FORWARD/CORRECTIONS/data/fmd_corrections.root
+</code></pre><p>you can do:</p>
+<pre><code class="lang-cpp">TFile::Open(AliDataFile::GetFileNameOADB(<span class="hljs-string">&quot;PWGLF/FORWARD/CORRECTIONS/data/fmd_corrections.root&quot;</span>))
 </code></pre>
-<p>This has two implications:</p>
-<ul>
-<li><p>After usage, <strong>we</strong> are responsible for freeing the allocated memory
-(else it&#x2019;s <strong>lost</strong>!)</p>
-</li>
-<li><p>A bit more advanced: you might have to think about the copy constructor
-and assignment operator </p>
-</li>
-</ul>
-<h2 id="implementing-the-destructor">Implementing the destructor</h2>
-<p>Memory allocated with <strong>new</strong> cannot be used again, unless it is realased by <strong>delete</strong>. Never deleting memory is called a <strong>memory leak</strong>. Leaks are <strong>bad</strong>: they waste resources and can crash your system, and for that reason, we should implement a destructor</p>
-<p>Suppose we have a <strong>constructor</strong> that looks like this</p>
-<pre><code class="lang-cpp">    MyClass::MyClass()
-    {
-      n = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>;
-      p = <span class="hljs-keyword">new</span> <span class="hljs-keyword">float</span>;
-      x = <span class="hljs-keyword">new</span> <span class="hljs-keyword">float</span>[<span class="hljs-number">5</span>];
-    }
+<p>The static function <code>AliDataFile::GetFileNameOADB</code> returns the first accessible
+full URL of the OADB file by finding the first match from the following ordered
+list of paths:</p>
+<ol>
+<li><code>$OADB_PATH/&lt;file&gt;</code></li>
+<li><code>$ALICE_DATA/OADB/&lt;file&gt;</code></li>
+<li><code>$ALICE_PHYSICS/OADB/&lt;file&gt;</code></li>
+<li><code>/cvmfs/alice.cern.ch/data/prod/v5-XX-YY-01/OADB/&lt;file&gt;</code> (for Grid jobs, or with CVMFS installed)</li>
+<li><code>/cvmfs/alice.cern.ch/data/analysis/YYYY/vAN-YYYYMMDD/OADB/&lt;file&gt;</code> (for Grid jobs, or with CVMFS installed)</li>
+<li><code>root://eospublic.cern.ch//eos/experiment/alice/analysis-data/OADB/&lt;file&gt;</code></li>
+</ol>
+<p>This means that for laptop analysis it will always be possible to access data
+files, somehow, and in a transparent fashion. If you want to have your OADB
+data locally, you can download it from lxplus:</p>
+<pre><code class="lang-bash"><span class="hljs-built_in">export</span> OADB_PATH=/path/to/my/<span class="hljs-built_in">local</span>/oadb
+rsync -av --delete cern_user@lxplus.cern.ch:/eos/experiment/alice/analysis-data/ <span class="hljs-variable">$OADB_PATH</span>/
 </code></pre>
-<p>The <strong>destructor</strong> should be</p>
-<pre><code class="lang-cpp">    MyClass::~MyClass()
-    {
-      <span class="hljs-keyword">delete</span> n;
-      <span class="hljs-keyword">delete</span> p;
-      <span class="hljs-keyword">delete</span>[] x;
-    }
+<blockquote>
+<p>Trailing slashes are important to rsync! Do not forget them!</p>
+</blockquote>
+<p>Note that the variable <code>$OADB_PATH</code> must be exported to the environment where
+you run your local analysis in order to make it visible to the job.</p>
+<h3 id="non-oadb-data-files">Non-OADB data files</h3>
+<p>The same EOS path has also PWG-specific directories, outside the OADB one, for
+other analysis-specific data. The following interface can be used to access
+files from there:</p>
+<pre><code class="lang-cpp">TFile::Open(AliDataFile::GetFileName(<span class="hljs-string">&quot;PWGMM/my_large_data.root&quot;</span>))
 </code></pre>
-<p>Our life is not so easy however: </p>
-<ul>
-<li><p>We did not allocate memory in the class constructor but in
-<code>UserCreateOutputObjects</code></p>
-</li>
-<li><p>We <strong>might</strong> want to free that memory, but what if
-<code>UserCreateOutputObjects</code> was <strong>not</strong> called? &#x2014;if it hasn&#x2019;t, freeing
-the memory will cause serious problems (the infamous &#x2018;glibc double
-free or corruption&#x2019;)</p>
-</li>
-<li><p>To avoid this, initialize our pointers to NULL in the member
-initialization list</p>
-<pre><code class="lang-cpp">     ...
-    AliAnalysisTaskMyTask::AliAnalysisTaskMyTask() : AliAnalysisTaskSE(), 
-        fAOD(<span class="hljs-number">0</span>), fOutputList(<span class="hljs-number">0</span>), fHistPt(<span class="hljs-number">0</span>)
-    {
-        <span class="hljs-comment">// ROOT IO constructor, don&apos;t allocate memory here!</span>
-    }
-     ...
-</code></pre>
-</li>
-<li>With our pointers initialized to NULL, we can go ahead and write our
-destructor</li>
-</ul>
-<pre><code class="lang-cpp">    AliAnalysisMyTask::~AliAnalysisMyTask()
-    {
-      <span class="hljs-keyword">if</span>(fOutputList) <span class="hljs-keyword">delete</span> fOutputList;
-    }
-</code></pre>
-<ul>
-<li><p>A little trick we applied is</p>
-<pre><code>fOutputList-&gt;SetOwner(kTRUE);
-</code></pre><p>which tells the destructor of TList* to delete all objects added to
-it</p>
-</li>
-<li><p>Note that fAOD is not deleted - this pointer points to memory that
-was <strong>not</strong> allocated by our task</p>
-</li>
-</ul>
-<p><div class="panel panel-primary"><div class="panel-heading"><h3 class="panel-title" onclick="javascript:toggle(2726950118);" id="new---delete"><i class="fa fa-info-circle"></i> new - delete<span id="heading-2726950118"></span></h3></div><div class="panel-body" id="panel-2726950118"><p>Rule of thumb: all calls to <strong>new</strong> should be accompanied by a call to
-<strong>delete</strong> somewhere in your code</p>
-</div></div></p>
-<h2 id="destructors-and-proof">Destructors and PROOF</h2>
-<p>If you run on <code>PROOF</code>, your analysis class is not the owner of its output list. A little trick to avoid segmentation violations when running on PROOF is to write</p>
-<pre><code class="lang-cpp">    AliAnalysisMyTask::~AliAnalysisMyTask()
-    {
-      <span class="hljs-keyword">if</span>(AliAnalysisManager::GetAnalysisManager()-&gt;GetAnalysisType()
-        != AliAnalysisManager::kProofAnalysis) <span class="hljs-keyword">delete</span> fOutputList;
-    }
-</code></pre>
-<p>This only deletes the output list if you&#x2019;re not running PROOF. </p>
-<h2 id="copy-constructor-and-assignment-operator">Copy constructor and assignment operator</h2>
-<p>Sometimes in AliRoot code you see copy constructors and assignment operators (these two always go together). In principle, we don&#x2019;t need them because our analysis class is never copied (apart from the streamer actions, which do not rely on these constructors). However, you might occasionally see compiler warnings such as</p>
-<pre><code>     warning: &apos;class AliAnalysisTaskMyTask&apos; has pointer 
-     data members but does not override &apos;AliAnalysisTaskMyTask(const
-     AliAnalysisTaskMyTask&amp;)&apos; or &apos;operator=(const AliAnalysisTaskMyTask&amp;)&apos; 
-     [-Weffc++]&quot;
-</code></pre><p>Generally, these can be squashed by defining prototypes </p>
-<pre><code class="lang-cpp">    <span class="hljs-keyword">private</span>:
-      <span class="hljs-comment">// not implemented</span>
-      AliAnalysisTaskMyTask(<span class="hljs-keyword">const</span> AliAnalysisTaskMyTask&amp;); 
-      AliAnalysisTaskMyTask&amp; <span class="hljs-keyword">operator</span>=(<span class="hljs-keyword">const</span> AliAnalysisTaskMyTask&amp;);
-</code></pre>
-<p>Defining these functions as <code>private</code> implicates that we do not have provide an implementation. </p>
-<p>So what does this mean, what are copy constructors and assignment operators, why do I need them, and how can I get them? If you are interested in this, keep reading. </p>
-<p>In a nutshell:</p>
-<pre><code class="lang-cpp">        MyObject A;      <span class="hljs-comment">// initialization by default constructor</span>
-        <span class="hljs-function">MyObject <span class="hljs-title">B</span><span class="hljs-params">(A)</span></span>;   <span class="hljs-comment">// initialization by copy constructor</span>
-        MyObject C = A;  <span class="hljs-comment">// Also initialization by copy constructor</span>
-        B = C;           <span class="hljs-comment">// assignment by copy assignment operator</span>
-</code></pre>
-<p>The copy constructor and assignment operator are <strong>automatically generated</strong>, but if your class has <strong>pointer members</strong>, they need to be customized (this is <strong>not</strong> a ROOT feature, just c++!). </p>
-<p>If we wanted to implement our own copy constructor for our class, here is what it would look like</p>
-<pre><code class="lang-cpp">    AliAnalysisMyTask::AliAnalysisMyTask
-      (<span class="hljs-keyword">const</span> AliAnalysisMyTask&amp; other) : AliAnalysisTaskSE(other),
-      fOutputList(<span class="hljs-literal">NULL</span>), fHistPt(<span class="hljs-literal">NULL</span>)
-    {
-      <span class="hljs-keyword">if</span>(other.fOutputList) fOutputList = (TList*)other.fOutputList-&gt;Clone();
-      <span class="hljs-keyword">if</span>(other.fHistPt) fHistPt = <span class="hljs-keyword">new</span> TH1F(*other.fHistPt);
-    }
-</code></pre>
-<ul>
-<li><p>Operating on NULL pointers is not allowed and the code will crash if
-you attempt to do that</p>
-</li>
-<li><p>Operating on uninitialized pointers is <em>undefined</em> and much more
-dangerous</p>
-</li>
-<li><p>The TH1F and most ROOT histogram classes have public copy
-constructors, so we can use them</p>
-</li>
-<li><p>The TList copy constructor is private, so we need to make a Clone of
-it instead</p>
-</li>
-</ul>
-<p>The assignment operator is very similar to the copy constructor, but it has the additional requirements for checking for self-assignment and returning a value. In our case, it could look like</p>
-<pre><code class="lang-cpp">    AliAnalysisMyTask&amp; AliAnalysisMyTask::<span class="hljs-keyword">operator</span>=
-      (<span class="hljs-keyword">const</span> AliAnalysisMyTask&amp; other)
-    {
-      <span class="hljs-keyword">if</span>(&amp;other == <span class="hljs-keyword">this</span>) <span class="hljs-keyword">return</span> *<span class="hljs-keyword">this</span>;
-      outputlist = <span class="hljs-literal">NULL</span>;
-      fHistPt = <span class="hljs-literal">NULL</span>;
-      AliAnalysisTaskSE::<span class="hljs-keyword">operator</span>=(other);
-      <span class="hljs-keyword">if</span>(other.fOutputList) fOutputList = (TList*)other.fOutputList-&gt;Clone();
-      <span class="hljs-keyword">if</span>(other.fHistPt) fHistPt = <span class="hljs-keyword">new</span> TProfile(*other.fHistPt);
-      <span class="hljs-keyword">return</span> *<span class="hljs-keyword">this</span>;
-    }
-</code></pre>
+<blockquote>
+<p>Note the difference between <code>GetFileName()</code> and <code>GetFileNameOADB()</code>.</p>
+</blockquote>
+<p>In this case, the file will be searched in the following locations in order:</p>
+<ol>
+<li><code>$ALICE_DATA/&lt;file&gt;</code></li>
+<li><code>$ALICE_PHYSICS/&lt;file&gt;</code></li>
+<li><code>/cvmfs/alice.cern.ch/data/prod/v5-XX-YY-01/&lt;file&gt;</code> (for Grid jobs, or with CVMFS installed)</li>
+<li><code>/cvmfs/alice.cern.ch/data/analysis/YYYY/vAN-YYYYMMDD/&lt;file&gt;</code> (for Grid jobs, or with CVMFS installed)</li>
+</ol>
 
                                 
                                 </section>
@@ -944,12 +866,12 @@ it instead</p>
 
             
                 
-                <a href="streamer.html" class="navigation navigation-prev " aria-label="Previous page: The ROOT streamer">
+                <a href="monalisa.html" class="navigation navigation-prev " aria-label="Previous page: AliMonitor">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="./" class="navigation navigation-next " aria-label="Next page: Analysis tutorial exercises">
+                <a href="trouble.html" class="navigation navigation-next " aria-label="Next page: Troubleshooting">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -960,7 +882,7 @@ it instead</p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Destructors","level":"1.4.10","depth":2,"next":{"title":"Analysis tutorial exercises","level":"1.5","depth":1,"path":"analysis/README.md","ref":"analysis/README.md","articles":[{"title":"Step 1 - Setup the tutorial","level":"1.5.1","depth":2,"path":"analysis/setup.md","ref":"analysis/setup.md","articles":[]},{"title":"Step 2 - Running the task","level":"1.5.2","depth":2,"path":"analysis/running.md","ref":"analysis/running.md","articles":[]},{"title":"Step 3 - Modify the task","level":"1.5.3","depth":2,"path":"analysis/modify.md","ref":"analysis/modify.md","articles":[]},{"title":"Step 4 -The track loop","level":"1.5.4","depth":2,"path":"analysis/track.md","ref":"analysis/track.md","articles":[]},{"title":"Step 5 -Particle identification","level":"1.5.5","depth":2,"path":"analysis/pid.md","ref":"analysis/pid.md","articles":[]},{"title":"Step 6 -Using Monte Carlo data","level":"1.5.6","depth":2,"path":"analysis/MC.md","ref":"analysis/MC.md","articles":[]},{"title":"Step 7 -Run your code on GRID","level":"1.5.7","depth":2,"path":"analysis/grid.md","ref":"analysis/grid.md","articles":[]},{"title":"Bonus content","level":"1.5.8","depth":2,"path":"analysis/bonus.md","ref":"analysis/bonus.md","articles":[]},{"title":"Some hints","level":"1.5.9","depth":2,"path":"analysis/hints.md","ref":"analysis/hints.md","articles":[]},{"title":"Transition from ROOT5 to ROOT6","level":"1.5.10","depth":2,"path":"analysis/ROOT5-to-6.md","ref":"analysis/ROOT5-to-6.md","articles":[]}]},"previous":{"title":"The ROOT streamer","level":"1.4.9","depth":2,"path":"analysis/streamer.md","ref":"analysis/streamer.md","articles":[]},"dir":"ltr"},"config":{"plugins":["katex","panels@git+https://github.com/lhcb/gitbook-plugin-panels.git#117012fdc18c96831cb88196980c0ea73b0c87b8","collapsible-menu","block-align","page-toc"],"styles":{"website":"css/website.css"},"pluginsConfig":{"collapsible-menu":{},"block-align":{},"search":{},"page-toc":{"position":"before-first","selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4","showByDefault":true},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"panels":{},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"ALICE Analysis Tutorial","gitbook":"*","description":"Introduction to the common analysis techniques and tools of ALICE"},"file":{"path":"analysis/destructor.md","mtime":"2020-10-30T11:38:17.435Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-10-30T11:39:00.580Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Offline analysis database","level":"1.4.7","depth":2,"next":{"title":"Troubleshooting","level":"1.4.8","depth":2,"path":"analysis/trouble.md","ref":"analysis/trouble.md","articles":[]},"previous":{"title":"AliMonitor","level":"1.4.6","depth":2,"path":"analysis/monalisa.md","ref":"analysis/monalisa.md","articles":[]},"dir":"ltr"},"config":{"plugins":["katex","panels@git+https://github.com/lhcb/gitbook-plugin-panels.git#117012fdc18c96831cb88196980c0ea73b0c87b8","collapsible-menu","block-align","page-toc"],"styles":{"website":"css/website.css"},"pluginsConfig":{"collapsible-menu":{},"block-align":{},"search":{},"page-toc":{"position":"before-first","selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4","showByDefault":true},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"panels":{},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"ALICE Analysis Tutorial","gitbook":"*","description":"Introduction to the common analysis techniques and tools of ALICE"},"file":{"path":"analysis/oadb.md","mtime":"2020-10-30T11:38:17.455Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-10-30T11:39:00.580Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
